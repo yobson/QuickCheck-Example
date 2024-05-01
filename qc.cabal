@@ -1,0 +1,34 @@
+cabal-version:   3.0
+name:            qc
+version:         0.1.0.0
+license:         NONE
+author:          James Hobson
+maintainer:      james@hobson.space
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+
+executable qc
+    import:           warnings
+    main-is:          Main.hs
+    build-depends:    base ^>=4.16.4.0,
+                      qc-lib
+    hs-source-dirs:   app
+    ghc-options:      -threaded
+    default-language: Haskell2010
+
+library qc-lib
+    import:           warnings
+    exposed-modules:  TheLib
+    build-depends:    base ^>=4.16.4.0
+    hs-source-dirs:   src
+    default-language: Haskell2010
+
+Test-Suite test-qc
+    type:             detailed-0.9
+    test-module:      Tests
+    hs-source-dirs:   tests
+    build-depends:    base >= 4 && < 5, Cabal >= 1.9.2, cabal-detailed-quickcheck, QuickCheck, qc-lib
+    default-language: Haskell2010
